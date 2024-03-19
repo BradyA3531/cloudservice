@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "storage_/index_style.css" %}">
+</head>
+<body>
+    <div class="center-div">
+        <span class="dashboard"><a class="dashboard-item" href="storage/upload">Upload file</a> <a class="dashboard-item"href="logout">logout</a></span>
+        <br>
+        <table class="zui-table">
+            <thead>
+                <tr>
+                    <th>File name</th>
+                    <th>Info</th>
+                    <th>File Size</th>
+                    <th>Date Uploaded</th>
+                    <th>Download</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for data in data%}
+                <tr>
+                    <td>{{data.file_name}}</td>
+                    <td><a href="{%url 'more_info' data.id %}">More Info</a></td>
+                    <td>{{data.file_size | filesizeformat}}</td>
+                    <td>{{data.date}}</td>
+                    <td><a href="/files/{{data.file}}" download>download</a></td>
+                    <td><a href="{%url 'delete' data.id %}">X</a></td>
+                    
+                </tr>
+                {%endfor%}
+                
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
